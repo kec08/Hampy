@@ -1,0 +1,796 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BCFDE9BC2FA8843100E06AE6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCFDE9BB2FA8843100E06AE6 /* WidgetKit.framework */; };
+		BCFDE9BE2FA8843100E06AE6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCFDE9BD2FA8843100E06AE6 /* SwiftUI.framework */; };
+		BCFDE9CD2FA8843300E06AE6 /* HampyActivityExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BCFDE9B92FA8843100E06AE6 /* HampyActivityExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BCFDE9292FA86D8200E06AE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BCFDE9132FA86D8000E06AE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCFDE91A2FA86D8000E06AE6;
+			remoteInfo = Hampy;
+		};
+		BCFDE9332FA86D8200E06AE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BCFDE9132FA86D8000E06AE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCFDE91A2FA86D8000E06AE6;
+			remoteInfo = Hampy;
+		};
+		BCFDE9CB2FA8843300E06AE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BCFDE9132FA86D8000E06AE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCFDE9B82FA8843100E06AE6;
+			remoteInfo = HampyActivityExtensionExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BCFDE9AC2FA8841200E06AE6 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BCFDE9CD2FA8843300E06AE6 /* HampyActivityExtensionExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BCFDE91B2FA86D8000E06AE6 /* Hampy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hampy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCFDE9282FA86D8200E06AE6 /* HampyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HampyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCFDE9322FA86D8200E06AE6 /* HampyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HampyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCFDE9B92FA8843100E06AE6 /* HampyActivityExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HampyActivityExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCFDE9BB2FA8843100E06AE6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		BCFDE9BD2FA8843100E06AE6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BCFDE9CE2FA8843300E06AE6 /* Exceptions for "HampyActivityExtension" folder in "HampyActivityExtensionExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BCFDE9B82FA8843100E06AE6 /* HampyActivityExtensionExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		BCFDE91D2FA86D8000E06AE6 /* Hampy */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Hampy;
+			sourceTree = "<group>";
+		};
+		BCFDE92B2FA86D8200E06AE6 /* HampyTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = HampyTests;
+			sourceTree = "<group>";
+		};
+		BCFDE9352FA86D8200E06AE6 /* HampyUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = HampyUITests;
+			sourceTree = "<group>";
+		};
+		BCFDE9BF2FA8843100E06AE6 /* HampyActivityExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BCFDE9CE2FA8843300E06AE6 /* Exceptions for "HampyActivityExtension" folder in "HampyActivityExtensionExtension" target */,
+			);
+			path = HampyActivityExtension;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BCFDE9182FA86D8000E06AE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFDE9252FA86D8200E06AE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFDE92F2FA86D8200E06AE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFDE9B62FA8843100E06AE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFDE9BE2FA8843100E06AE6 /* SwiftUI.framework in Frameworks */,
+				BCFDE9BC2FA8843100E06AE6 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BCFDE9122FA86D8000E06AE6 = {
+			isa = PBXGroup;
+			children = (
+				BCFDE91D2FA86D8000E06AE6 /* Hampy */,
+				BCFDE92B2FA86D8200E06AE6 /* HampyTests */,
+				BCFDE9352FA86D8200E06AE6 /* HampyUITests */,
+				BCFDE9BF2FA8843100E06AE6 /* HampyActivityExtension */,
+				BCFDE9BA2FA8843100E06AE6 /* Frameworks */,
+				BCFDE91C2FA86D8000E06AE6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BCFDE91C2FA86D8000E06AE6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BCFDE91B2FA86D8000E06AE6 /* Hampy.app */,
+				BCFDE9282FA86D8200E06AE6 /* HampyTests.xctest */,
+				BCFDE9322FA86D8200E06AE6 /* HampyUITests.xctest */,
+				BCFDE9B92FA8843100E06AE6 /* HampyActivityExtensionExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BCFDE9BA2FA8843100E06AE6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BCFDE9BB2FA8843100E06AE6 /* WidgetKit.framework */,
+				BCFDE9BD2FA8843100E06AE6 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BCFDE91A2FA86D8000E06AE6 /* Hampy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCFDE93C2FA86D8200E06AE6 /* Build configuration list for PBXNativeTarget "Hampy" */;
+			buildPhases = (
+				BCFDE9172FA86D8000E06AE6 /* Sources */,
+				BCFDE9182FA86D8000E06AE6 /* Frameworks */,
+				BCFDE9192FA86D8000E06AE6 /* Resources */,
+				BCFDE9AC2FA8841200E06AE6 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BCFDE9CC2FA8843300E06AE6 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				BCFDE91D2FA86D8000E06AE6 /* Hampy */,
+			);
+			name = Hampy;
+			packageProductDependencies = (
+			);
+			productName = Hampy;
+			productReference = BCFDE91B2FA86D8000E06AE6 /* Hampy.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BCFDE9272FA86D8200E06AE6 /* HampyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCFDE93F2FA86D8200E06AE6 /* Build configuration list for PBXNativeTarget "HampyTests" */;
+			buildPhases = (
+				BCFDE9242FA86D8200E06AE6 /* Sources */,
+				BCFDE9252FA86D8200E06AE6 /* Frameworks */,
+				BCFDE9262FA86D8200E06AE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BCFDE92A2FA86D8200E06AE6 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				BCFDE92B2FA86D8200E06AE6 /* HampyTests */,
+			);
+			name = HampyTests;
+			packageProductDependencies = (
+			);
+			productName = HampyTests;
+			productReference = BCFDE9282FA86D8200E06AE6 /* HampyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BCFDE9312FA86D8200E06AE6 /* HampyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCFDE9422FA86D8200E06AE6 /* Build configuration list for PBXNativeTarget "HampyUITests" */;
+			buildPhases = (
+				BCFDE92E2FA86D8200E06AE6 /* Sources */,
+				BCFDE92F2FA86D8200E06AE6 /* Frameworks */,
+				BCFDE9302FA86D8200E06AE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BCFDE9342FA86D8200E06AE6 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				BCFDE9352FA86D8200E06AE6 /* HampyUITests */,
+			);
+			name = HampyUITests;
+			packageProductDependencies = (
+			);
+			productName = HampyUITests;
+			productReference = BCFDE9322FA86D8200E06AE6 /* HampyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		BCFDE9B82FA8843100E06AE6 /* HampyActivityExtensionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCFDE9CF2FA8843300E06AE6 /* Build configuration list for PBXNativeTarget "HampyActivityExtensionExtension" */;
+			buildPhases = (
+				BCFDE9B52FA8843100E06AE6 /* Sources */,
+				BCFDE9B62FA8843100E06AE6 /* Frameworks */,
+				BCFDE9B72FA8843100E06AE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BCFDE9BF2FA8843100E06AE6 /* HampyActivityExtension */,
+			);
+			name = HampyActivityExtensionExtension;
+			packageProductDependencies = (
+			);
+			productName = HampyActivityExtensionExtension;
+			productReference = BCFDE9B92FA8843100E06AE6 /* HampyActivityExtensionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BCFDE9132FA86D8000E06AE6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					BCFDE91A2FA86D8000E06AE6 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					BCFDE9272FA86D8200E06AE6 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = BCFDE91A2FA86D8000E06AE6;
+					};
+					BCFDE9312FA86D8200E06AE6 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = BCFDE91A2FA86D8000E06AE6;
+					};
+					BCFDE9B82FA8843100E06AE6 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+				};
+			};
+			buildConfigurationList = BCFDE9162FA86D8000E06AE6 /* Build configuration list for PBXProject "Hampy" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BCFDE9122FA86D8000E06AE6;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = BCFDE91C2FA86D8000E06AE6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BCFDE91A2FA86D8000E06AE6 /* Hampy */,
+				BCFDE9272FA86D8200E06AE6 /* HampyTests */,
+				BCFDE9312FA86D8200E06AE6 /* HampyUITests */,
+				BCFDE9B82FA8843100E06AE6 /* HampyActivityExtensionExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BCFDE9192FA86D8000E06AE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFDE9262FA86D8200E06AE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFDE9302FA86D8200E06AE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFDE9B72FA8843100E06AE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BCFDE9172FA86D8000E06AE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFDE9242FA86D8200E06AE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFDE92E2FA86D8200E06AE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFDE9B52FA8843100E06AE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BCFDE92A2FA86D8200E06AE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BCFDE91A2FA86D8000E06AE6 /* Hampy */;
+			targetProxy = BCFDE9292FA86D8200E06AE6 /* PBXContainerItemProxy */;
+		};
+		BCFDE9342FA86D8200E06AE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BCFDE91A2FA86D8000E06AE6 /* Hampy */;
+			targetProxy = BCFDE9332FA86D8200E06AE6 /* PBXContainerItemProxy */;
+		};
+		BCFDE9CC2FA8843300E06AE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BCFDE9B82FA8843100E06AE6 /* HampyActivityExtensionExtension */;
+			targetProxy = BCFDE9CB2FA8843300E06AE6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BCFDE93A2FA86D8200E06AE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = QLF22M2925;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BCFDE93B2FA86D8200E06AE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = QLF22M2925;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BCFDE93D2FA86D8200E06AE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QLF22M2925;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				INFOPLIST_KEY_UIAppFonts = (
+					"DOSGothic.ttf",
+					"DOSIyagiBoldface.ttf",
+					"DOSMyungjo.ttf",
+					"DOSPilgi.ttf",
+					"DOSSaemmul.ttf",
+					"MiraeroNormal.ttf",
+					"Sam3KRFont.ttf",
+				);
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunchan.Hampy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		BCFDE93E2FA86D8200E06AE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QLF22M2925;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				INFOPLIST_KEY_UIAppFonts = (
+					"DOSGothic.ttf",
+					"DOSIyagiBoldface.ttf",
+					"DOSMyungjo.ttf",
+					"DOSPilgi.ttf",
+					"DOSSaemmul.ttf",
+					"MiraeroNormal.ttf",
+					"Sam3KRFont.ttf",
+				);
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunchan.Hampy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		BCFDE9402FA86D8200E06AE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QLF22M2925;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunchan.HampyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hampy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hampy";
+			};
+			name = Debug;
+		};
+		BCFDE9412FA86D8200E06AE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QLF22M2925;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunchan.HampyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hampy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hampy";
+			};
+			name = Release;
+		};
+		BCFDE9432FA86D8200E06AE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QLF22M2925;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunchan.HampyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Hampy;
+			};
+			name = Debug;
+		};
+		BCFDE9442FA86D8200E06AE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QLF22M2925;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunchan.HampyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Hampy;
+			};
+			name = Release;
+		};
+		BCFDE9D02FA8843300E06AE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QLF22M2925;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HampyActivityExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HampyActivityExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunchan.Hampy.HampyActivityExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BCFDE9D12FA8843300E06AE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QLF22M2925;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HampyActivityExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HampyActivityExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunchan.Hampy.HampyActivityExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BCFDE9162FA86D8000E06AE6 /* Build configuration list for PBXProject "Hampy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCFDE93A2FA86D8200E06AE6 /* Debug */,
+				BCFDE93B2FA86D8200E06AE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCFDE93C2FA86D8200E06AE6 /* Build configuration list for PBXNativeTarget "Hampy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCFDE93D2FA86D8200E06AE6 /* Debug */,
+				BCFDE93E2FA86D8200E06AE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCFDE93F2FA86D8200E06AE6 /* Build configuration list for PBXNativeTarget "HampyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCFDE9402FA86D8200E06AE6 /* Debug */,
+				BCFDE9412FA86D8200E06AE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCFDE9422FA86D8200E06AE6 /* Build configuration list for PBXNativeTarget "HampyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCFDE9432FA86D8200E06AE6 /* Debug */,
+				BCFDE9442FA86D8200E06AE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCFDE9CF2FA8843300E06AE6 /* Build configuration list for PBXNativeTarget "HampyActivityExtensionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCFDE9D02FA8843300E06AE6 /* Debug */,
+				BCFDE9D12FA8843300E06AE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BCFDE9132FA86D8000E06AE6 /* Project object */;
+}
