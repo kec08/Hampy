@@ -23,7 +23,7 @@ struct HampyView: View {
         ZStack {
             // 하트 (크게, 위로 떠오름)
             if showHeart {
-                PixelHeartIcon(size: 4)
+                PixelHeartIcon(size: 5)
                     .offset(y: -80 + heartOffset)
                     .opacity(heartOpacity)
             }
@@ -36,7 +36,10 @@ struct HampyView: View {
             }
 
             // 햄스터
-            PixelHamsterView(emotion: displayEmotion, pixelSize: 9)
+            Image(displayImageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 144, height: 144)
                 .offset(y: frameToggle ? -3 : 0)
                 .rotationEffect(.degrees(wiggleAngle))
                 .gesture(petGesture)
@@ -46,11 +49,18 @@ struct HampyView: View {
         .onAppear { startIdleAnimation() }
     }
 
-    private var displayEmotion: HamsterEmotion {
+    private var displayImageName: String {
         switch reactionState {
-        case .petted: return .happy
-        case .surprised: return .upset
-        case .none: return emotion
+        case .petted: return "hampy_love"
+        case .surprised: return "hampy_surprised"
+        case .none:
+            switch emotion {
+            case .happy: return "hampy_happy"
+            case .hungry: return "hampy_hungry"
+            case .tired: return "hampy_tired"
+            case .upset: return "hampy_upset"
+            case .eating: return "hampy_eating"
+            }
         }
     }
 

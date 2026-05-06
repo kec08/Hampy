@@ -5,15 +5,16 @@ struct FeedView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var seedPosition: CGPoint = .zero
+    @State private var seedVelocity: CGSize = .zero
     @State private var isDragging = false
-    @State private var isThrown = false
+    @State private var isFlying = false
     @State private var isChewing = false
     @State private var showSeed = true
-    @State private var throwTarget: CGPoint = .zero
     @State private var hampyPosition: CGPoint = .zero
     @State private var chewText = ""
+    @State private var bounceCount = 0
 
-    private let hampyBaseY: CGFloat = 280
+    private let hampySize: CGFloat = 112
 
     private var canFeed: Bool { service.remainingFeeds > 0 }
 
@@ -27,26 +28,28 @@ struct FeedView: View {
                     .ignoresSafeArea()
 
                 // 햄피
-                PixelHamsterView(
-                    emotion: isChewing ? .eating : .happy,
-                    pixelSize: 7
-                )
-                .position(x: hampyPosition.x, y: hampyPosition.y)
-                .animation(.easeInOut(duration: 0.3), value: hampyPosition)
+                Image(isChewing ? "hampy_eating" : "hampy_happy")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: hampySize, height: hampySize)
+                    .position(x: hampyPosition.x, y: hampyPosition.y)
+                    .animation(.easeInOut(duration: 0.4), value: hampyPosition)
 
-                // 씹는 중 텍스트
+                // 씹는 텍스트
                 if !chewText.isEmpty {
-                    Text(chewText)
-                        .font(.custom("DOSGothic", size: 18))
-                        .foregroundStyle(.white)
-                        .position(x: hampyPosition.x, y: hampyBaseY - 70)
+                    OutlinedText(chewText, size: 18)
+                        .position(x: hampyPosition.x, y: hampyPosition.y - 70)
                 }
 
-                // 해바라기씨
+                // 해바라기씨 (에셋)
                 if showSeed && !isChewing {
-                    SeedSprite(disabled: !canFeed)
-                        .frame(width: 50, height: 50)
+                    Image("SeedIcon")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 44, height: 44)
+                        .rotationEffect(.degrees(isFlying ? Double(bounceCount) * 45 : 0))
                         .position(seedPosition)
+                        .opacity(canFeed ? 1.0 : 0.3)
                         .gesture(
                             canFeed ?
                             DragGesture()
@@ -55,7 +58,11 @@ struct FeedView: View {
                                     seedPosition = value.location
                                 }
                                 .onEnded { value in
-                                    throwSeed(from: value.location, velocity: value.predictedEndLocation, in: geo.size)
+                                    let velocity = CGSize(
+                                        width: value.predictedEndLocation.x - value.location.x,
+                                        height: value.predictedEndLocation.y - value.location.y
+                                    )
+                                    throwSeed(from: value.location, velocity: velocity, in: geo.size)
                                 }
                             : nil
                         )
@@ -65,9 +72,7 @@ struct FeedView: View {
                 VStack {
                     HStack {
                         Button(action: { dismiss() }) {
-                            Text("돌아가기")
-                                .font(.custom("DOSGothic", size: 16))
-                                .foregroundStyle(.white.opacity(0.8))
+                            OutlinedText("돌아가기", size: 16, color: .white.opacity(0.8))
                         }
                         Spacer()
                     }
@@ -77,52 +82,86 @@ struct FeedView: View {
                     Spacer()
                 }
 
-                // 하단: 해바라기씨 아이콘 + 개수
+                // 하단 씨앗 개수
                 VStack {
                     Spacer()
                     HStack(spacing: 4) {
-                        PixelSeedIcon(size: 3)
-                            .opacity(canFeed ? 1.0 : 0.3)
-                        Text("x\(service.remainingFeeds)")
-                            .font(.custom("DOSGothic", size: 20))
-                            .foregroundStyle(canFeed ? .white : .gray)
+                        Image("SeedIcon")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                        OutlinedText("x\(service.remainingFeeds)", size: 20)
                     }
+                    .opacity(canFeed ? 1.0 : 0.3)
                     .padding(.bottom, 50)
                 }
             }
             .onAppear {
-                seedPosition = CGPoint(x: geo.size.width / 2, y: geo.size.height - 130)
-                hampyPosition = CGPoint(x: geo.size.width / 2, y: hampyBaseY)
+                seedPosition = CGPoint(x: geo.size.width / 2, y: geo.size.height - 140)
+                hampyPosition = CGPoint(x: geo.size.width / 2, y: geo.size.height * 0.38)
             }
         }
     }
 
-    // MARK: - 던지기
+    // MARK: - 던지기 + 튕김
 
-    private func throwSeed(from position: CGPoint, velocity: CGPoint, in size: CGSize) {
+    private func throwSeed(from position: CGPoint, velocity: CGSize, in size: CGSize) {
         guard canFeed else { return }
 
-        isThrown = true
-        throwTarget = CGPoint(
-            x: min(max(velocity.x, 40), size.width - 40),
-            y: max(100, velocity.y)
-        )
+        isFlying = true
+        isDragging = false
+        bounceCount = 0
 
-        withAnimation(.easeOut(duration: 0.4)) {
-            seedPosition = throwTarget
-        }
+        // 드래그 세기 계산
+        let power = sqrt(velocity.width * velocity.width + velocity.height * velocity.height)
+        let speedFactor = min(power / 300, 3.0) // 최대 3배속
+
+        // 목표 위치 (드래그 방향)
+        var targetX = position.x + velocity.width * 0.5
+        var targetY = position.y + velocity.height * 0.5
+
+        // 화면 안에 제한
+        targetX = min(max(targetX, 30), size.width - 30)
+        targetY = min(max(targetY, 80), size.height - 100)
+
+        // 씨앗 날아가기
+        let flyDuration = max(0.2, 0.5 / speedFactor)
 
         Task { @MainActor in
-            try? await Task.sleep(for: .seconds(0.2))
+            // 1단계: 씨앗 날아감
+            withAnimation(.easeOut(duration: flyDuration)) {
+                seedPosition = CGPoint(x: targetX, y: targetY)
+            }
+            try? await Task.sleep(for: .seconds(flyDuration * 0.8))
 
-            withAnimation(.easeInOut(duration: 0.3)) {
-                hampyPosition = CGPoint(x: throwTarget.x, y: hampyBaseY)
+            // 2단계: 튕김 (세게 던질수록 많이 튕김)
+            let bounces = Int(min(speedFactor, 2))
+            for _ in 0..<bounces {
+                bounceCount += 1
+                let bounceX = targetX + CGFloat.random(in: -30...30)
+                let bounceY = targetY + CGFloat.random(in: -20...10)
+                let clampedX = min(max(bounceX, 30), size.width - 30)
+                let clampedY = min(max(bounceY, 80), size.height - 100)
+
+                withAnimation(.easeOut(duration: 0.15)) {
+                    seedPosition = CGPoint(x: clampedX, y: clampedY)
+                }
+                try? await Task.sleep(for: .seconds(0.15))
+
+                targetX = clampedX
+                targetY = clampedY
             }
 
-            try? await Task.sleep(for: .seconds(0.3))
+            // 3단계: 햄피가 씨앗 위치로 이동해서 먹기
+            let finalSeedPos = seedPosition
+            withAnimation(.easeInOut(duration: 0.4)) {
+                hampyPosition = CGPoint(x: finalSeedPos.x, y: finalSeedPos.y)
+            }
+            try? await Task.sleep(for: .seconds(0.4))
 
+            // 4단계: 먹기
             let fed = service.feed()
             showSeed = false
+            isFlying = false
 
             if fed {
                 isChewing = true
@@ -132,63 +171,15 @@ struct FeedView: View {
                 isChewing = false
             }
 
-            withAnimation {
-                isThrown = false
-                isDragging = false
+            // 리셋
+            withAnimation(.easeInOut(duration: 0.3)) {
+                hampyPosition = CGPoint(x: size.width / 2, y: size.height * 0.38)
             }
+            try? await Task.sleep(for: .seconds(0.3))
+
             showSeed = true
-            seedPosition = CGPoint(x: size.width / 2, y: size.height - 130)
-            hampyPosition = CGPoint(x: size.width / 2, y: hampyBaseY)
-        }
-    }
-}
-
-// MARK: - 해바라기씨 스프라이트
-
-private struct SeedSprite: View {
-    var disabled: Bool = false
-
-    var body: some View {
-        Canvas { context, size in
-            let px: CGFloat = 5
-            let grid: [[Character]] = [
-                Array("....OO...."),
-                Array("...ODDO..."),
-                Array("..ODDLDO.."),
-                Array(".ODDLDDO.."),
-                Array("ODDLDDDO.."),
-                Array("ODDDDDDO.."),
-                Array(".ODDDDDO.."),
-                Array("..ODDDO..."),
-                Array("...OOO...."),
-                Array(".........."),
-            ]
-            let offsetX = (size.width - 10 * px) / 2
-            let offsetY = (size.height - 10 * px) / 2
-            for row in 0..<grid.count {
-                for col in 0..<grid[row].count {
-                    let char = grid[row][col]
-                    let color: Color?
-                    if disabled {
-                        color = switch char {
-                        case "O": Color.gray.opacity(0.3)
-                        case "D": Color.gray.opacity(0.2)
-                        case "L": Color.gray.opacity(0.15)
-                        default: nil
-                        }
-                    } else {
-                        color = switch char {
-                        case "O": Color(hex: 0x1a1a1a)
-                        case "D": Color(hex: 0x3d3d3d)
-                        case "L": Color(hex: 0xd4c9a8)
-                        default: nil
-                        }
-                    }
-                    guard let c = color else { continue }
-                    let rect = CGRect(x: offsetX + CGFloat(col) * px, y: offsetY + CGFloat(row) * px, width: px, height: px)
-                    context.fill(Path(rect), with: .color(c))
-                }
-            }
+            seedPosition = CGPoint(x: size.width / 2, y: size.height - 140)
+            bounceCount = 0
         }
     }
 }

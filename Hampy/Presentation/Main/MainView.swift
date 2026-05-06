@@ -45,17 +45,13 @@ struct MainView: View {
                 HStack(spacing: 60) {
                     VStack(spacing: 6) {
                         PixelSeedIcon(size: 4)
-                        Text("먹이")
-                            .font(.custom("DOSGothic", size: 16))
-                            .foregroundStyle(.white)
+                        OutlinedText("먹이", size: 16)
                     }
                     .onTapGesture { showFeed = true }
 
                     VStack(spacing: 6) {
                         PixelWheelIcon(size: 4)
-                        Text("쳇바퀴")
-                            .font(.custom("DOSGothic", size: 16))
-                            .foregroundStyle(.white)
+                        OutlinedText("쳇바퀴", size: 16)
                     }
                     .onTapGesture { showWheel = true }
                 }
@@ -76,16 +72,15 @@ struct MainView: View {
 private struct ProfileView: View {
     var body: some View {
         HStack(spacing: 10) {
-            PixelHamsterView(emotion: .happy, pixelSize: 2.5)
-                .frame(width: 40, height: 40)
+            Image("hampy_happy")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 42, height: 42)
+                .clipShape(Circle())
 
             VStack(alignment: .leading, spacing: 3) {
-                Text("햄피")
-                    .font(.custom("DOSGothic", size: 18))
-                    .foregroundStyle(.white)
-                Text("Lv.1")
-                    .font(.custom("DOSGothic", size: 13))
-                    .foregroundStyle(Color(hex: 0xffd700))
+                OutlinedText("햄피", size: 18)
+                OutlinedText("Lv.1", size: 13, color: Color(hex: 0xffd700))
             }
         }
     }
@@ -118,11 +113,13 @@ private struct DaisyParticles: View {
     }
 
     private func updatePetals() {
+        let screenW: CGFloat = 400
+        let screenH: CGFloat = 900
         for i in 0..<petals.count {
             petals[i].y += petals[i].speed
             petals[i].x += sin(petals[i].y / 30) * 0.5
-            if petals[i].y > UIScreen.main.bounds.height {
-                petals[i] = Petal.random()
+            if petals[i].y > screenH {
+                petals[i] = Petal.random(width: screenW, height: screenH)
                 petals[i].y = -10
             }
         }
@@ -135,10 +132,10 @@ private struct Petal {
     var speed: CGFloat
     var opacity: Double
 
-    static func random() -> Petal {
+    static func random(width: CGFloat = 400, height: CGFloat = 900) -> Petal {
         Petal(
-            x: CGFloat.random(in: 0...UIScreen.main.bounds.width),
-            y: CGFloat.random(in: -100...UIScreen.main.bounds.height),
+            x: CGFloat.random(in: 0...width),
+            y: CGFloat.random(in: -100...height),
             speed: CGFloat.random(in: 0.3...0.8),
             opacity: Double.random(in: 0.2...0.5)
         )

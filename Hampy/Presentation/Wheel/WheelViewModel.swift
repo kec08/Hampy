@@ -66,14 +66,13 @@ final class WheelViewModel {
 
             speed = 0
             isRunning = false
-        }
-    }
 
-    func reset() {
-        guard service.state.energy > 5 else { return }
-        isTired = false
-        speed = 0
-        rotationAngle = 0
-        tapTimestamps = []
+            // 지치면 5초 후 자동 회복
+            if isTired {
+                try? await Task.sleep(for: .seconds(5))
+                isTired = false
+                tapTimestamps = []
+            }
+        }
     }
 }

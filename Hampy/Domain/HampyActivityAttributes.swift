@@ -7,6 +7,7 @@ struct HampyActivityAttributes: ActivityAttributes {
         var hunger: Double
         var happiness: Double
         var energy: Double
-        var emotion: String // HamsterEmotion.rawValue
+        var emotion: String
+        var remainingFeeds: Int
     }
 }

@@ -57,11 +57,14 @@ final class LiveActivityService {
     // MARK: - Helper
 
     private func makeContentState(from state: HamsterState) -> HampyActivityAttributes.ContentState {
-        HampyActivityAttributes.ContentState(
+        let oneHourAgo = Date.now.addingTimeInterval(-3600)
+        let recentCount = state.feedTimestamps.filter { $0 > oneHourAgo }.count
+        return HampyActivityAttributes.ContentState(
             hunger: state.hunger,
             happiness: state.happiness,
             energy: state.energy,
-            emotion: state.currentEmotion.rawValue
+            emotion: state.currentEmotion.rawValue,
+            remainingFeeds: max(0, 5 - recentCount)
         )
     }
 }

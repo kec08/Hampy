@@ -11,15 +11,8 @@ final class HamsterService {
     private let happinessDecayPerMinute: Double = 0.3
     private let energyRecoveryPerMinute: Double = 0.2
 
-    private let storageKey = "hamster_state"
-
     init() {
-        if let data = UserDefaults.standard.data(forKey: storageKey),
-           let saved = try? JSONDecoder().decode(HamsterState.self, from: data) {
-            self.state = saved
-        } else {
-            self.state = .initial
-        }
+        self.state = SharedStorage.load()
         applyTimeDecay()
         liveActivity.start(state: state)
     }
@@ -80,9 +73,13 @@ final class HamsterService {
 
     private func save() {
         state.lastUpdated = .now
-        if let data = try? JSONEncoder().encode(state) {
-            UserDefaults.standard.set(data, forKey: storageKey)
-        }
+        SharedStorage.save(state)
         liveActivity.update(state: state)
+    }
+
+    /// 앱 포그라운드 복귀 시 공유 저장소에서 동기화
+    func syncFromShared() {
+        state = SharedStorage.load()
+        applyTimeDecay()
     }
 }
