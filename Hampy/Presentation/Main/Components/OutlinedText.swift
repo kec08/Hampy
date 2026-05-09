@@ -20,14 +20,14 @@ struct OutlinedText: View {
             ForEach([-outlineWidth, outlineWidth], id: \.self) { x in
                 ForEach([-outlineWidth, outlineWidth], id: \.self) { y in
                     Text(text)
-                        .font(.custom("DOSGothic", size: size))
+                        .font(.custom("DOSSaemmul", size: size))
                         .foregroundStyle(.black)
                         .offset(x: x, y: y)
                 }
             }
             // 본문
             Text(text)
-                .font(.custom("DOSGothic", size: size))
+                .font(.custom("DOSSaemmul", size: size))
                 .foregroundStyle(color)
         }
     }

@@ -23,12 +23,14 @@ final class WheelViewModel {
         guard !isTired else { return }
 
         // 에너지 체크
-        if service.state.energy <= 5 {
+        if service.state.energy <= 0 {
+            HampySound.tired.playWithHaptic()
             isTired = true
             speed = 0
             return
         }
 
+        HampySound.wheelTap.playWithHaptic()
         tapTimestamps.append(.now)
         // 최근 2초 내 탭만 유지
         tapTimestamps = tapTimestamps.filter { Date.now.timeIntervalSince($0) < 2.0 }

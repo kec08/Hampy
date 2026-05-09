@@ -35,8 +35,9 @@ struct MainView: View {
                 // 햄피 (큰 사이즈)
                 HampyView(
                     emotion: service.state.currentEmotion,
+                    size: service.state.sizeScale,
                     onPet: { service.pet() },
-                    onTap: { service.pet() }
+                    onTap: { service.surprise() }
                 )
 
                 Spacer()
@@ -70,6 +71,8 @@ struct MainView: View {
 // MARK: - 프로필
 
 private struct ProfileView: View {
+    @Environment(HamsterService.self) private var service
+
     var body: some View {
         HStack(spacing: 10) {
             Image("hampy_happy")
@@ -78,9 +81,20 @@ private struct ProfileView: View {
                 .frame(width: 42, height: 42)
                 .clipShape(Circle())
 
-            VStack(alignment: .leading, spacing: 3) {
+            VStack(alignment: .leading, spacing: 4) {
                 OutlinedText("햄피", size: 18)
-                OutlinedText("Lv.1", size: 13, color: Color(hex: 0xffd700))
+                OutlinedText("Lv.\(service.state.level)", size: 13, color: Color(hex: 0xffd700))
+
+                // 경험치 바
+                ZStack(alignment: .leading) {
+                    Rectangle()
+                        .fill(Color.black.opacity(0.3))
+                        .frame(width: 60, height: 6)
+                    Rectangle()
+                        .fill(Color(hex: 0x7ec8e3))
+                        .frame(width: 60 * service.state.experienceProgress, height: 6)
+                        .animation(.easeInOut(duration: 0.3), value: service.state.experienceProgress)
+                }
             }
         }
     }

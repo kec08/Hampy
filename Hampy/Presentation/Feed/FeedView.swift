@@ -50,9 +50,13 @@ struct FeedView: View {
                         .rotationEffect(.degrees(isFlying ? Double(bounceCount) * 45 : 0))
                         .position(seedPosition)
                         .opacity(canFeed ? 1.0 : 0.3)
+                        .onTapGesture {
+                            guard canFeed, !isFlying else { return }
+                            tapFeed(in: geo.size)
+                        }
                         .gesture(
                             canFeed ?
-                            DragGesture()
+                            DragGesture(minimumDistance: 5)
                                 .onChanged { value in
                                     isDragging = true
                                     seedPosition = value.location
@@ -62,7 +66,14 @@ struct FeedView: View {
                                         width: value.predictedEndLocation.x - value.location.x,
                                         height: value.predictedEndLocation.y - value.location.y
                                     )
-                                    throwSeed(from: value.location, velocity: velocity, in: geo.size)
+                                    let power = sqrt(velocity.width * velocity.width + velocity.height * velocity.height)
+                                    if power > 150 {
+                                        // 세게 던지기
+                                        throwSeed(from: value.location, velocity: velocity, in: geo.size)
+                                    } else {
+                                        // 살짝 놓기 → 햄피가 와서 먹기
+                                        dropFeed(at: seedPosition, in: geo.size)
+                                    }
                                 }
                             : nil
                         )
@@ -102,6 +113,82 @@ struct FeedView: View {
         }
     }
 
+    // MARK: - 탭 먹이주기 (씨앗 제자리 → 햄피가 와서 먹기)
+
+    private func tapFeed(in size: CGSize) {
+        isFlying = true
+
+        Task { @MainActor in
+            // 햄피가 씨앗 위치로 이동
+            withAnimation(.easeInOut(duration: 0.5)) {
+                hampyPosition = CGPoint(x: seedPosition.x, y: seedPosition.y)
+            }
+            try? await Task.sleep(for: .seconds(0.5))
+
+            // 먹기
+            let fed = service.feed()
+            showSeed = false
+            isFlying = false
+
+            if fed {
+                HampySound.eat.playWithHaptic()
+                isChewing = true
+                chewText = "-_- 냠냠..."
+                try? await Task.sleep(for: .seconds(1.2))
+                chewText = ""
+                isChewing = false
+            }
+
+            // 리셋
+            withAnimation(.easeInOut(duration: 0.3)) {
+                hampyPosition = CGPoint(x: size.width / 2, y: size.height * 0.38)
+            }
+            try? await Task.sleep(for: .seconds(0.3))
+
+            showSeed = true
+            seedPosition = CGPoint(x: size.width / 2, y: size.height - 140)
+        }
+    }
+
+    // MARK: - 드래그 후 살짝 놓기 (놓은 위치로 햄피가 와서 먹기)
+
+    private func dropFeed(at position: CGPoint, in size: CGSize) {
+        isDragging = false
+        isFlying = true
+
+        Task { @MainActor in
+            // 햄피가 씨앗 위치로 이동
+            withAnimation(.easeInOut(duration: 0.4)) {
+                hampyPosition = CGPoint(x: position.x, y: position.y)
+            }
+            try? await Task.sleep(for: .seconds(0.4))
+
+            // 먹기
+            let fed = service.feed()
+            showSeed = false
+            isFlying = false
+
+            if fed {
+                HampySound.eat.playWithHaptic()
+                isChewing = true
+                chewText = "-_- 냠냠..."
+                try? await Task.sleep(for: .seconds(1.2))
+                chewText = ""
+                isChewing = false
+            }
+
+            // 리셋
+            withAnimation(.easeInOut(duration: 0.3)) {
+                hampyPosition = CGPoint(x: size.width / 2, y: size.height * 0.38)
+            }
+            try? await Task.sleep(for: .seconds(0.3))
+
+            showSeed = true
+            seedPosition = CGPoint(x: size.width / 2, y: size.height - 140)
+            bounceCount = 0
+        }
+    }
+
     // MARK: - 던지기 + 튕김
 
     private func throwSeed(from position: CGPoint, velocity: CGSize, in size: CGSize) {
@@ -128,6 +215,7 @@ struct FeedView: View {
 
         Task { @MainActor in
             // 1단계: 씨앗 날아감
+            HampySound.feed.playWithHaptic()
             withAnimation(.easeOut(duration: flyDuration)) {
                 seedPosition = CGPoint(x: targetX, y: targetY)
             }
@@ -164,6 +252,7 @@ struct FeedView: View {
             isFlying = false
 
             if fed {
+                HampySound.eat.playWithHaptic()
                 isChewing = true
                 chewText = "-_- 냠냠..."
                 try? await Task.sleep(for: .seconds(1.2))

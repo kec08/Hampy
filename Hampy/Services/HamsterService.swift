@@ -19,30 +19,45 @@ final class HamsterService {
 
     // MARK: - Actions
 
-    /// 남은 먹이 개수 (1시간 5개 제한)
+    /// 남은 먹이 개수 (1시간 10개 제한)
     var remainingFeeds: Int {
         let oneHourAgo = Date.now.addingTimeInterval(-3600)
         let recentCount = state.feedTimestamps.filter { $0 > oneHourAgo }.count
-        return max(0, 5 - recentCount)
+        return max(0, 10 - recentCount)
     }
 
     func feed() -> Bool {
-        // 1시간 내 5개 제한
+        // 1시간 내 10개 제한
         let oneHourAgo = Date.now.addingTimeInterval(-3600)
         state.feedTimestamps = state.feedTimestamps.filter { $0 > oneHourAgo }
 
-        guard state.feedTimestamps.count < 5 else { return false }
+        guard state.feedTimestamps.count < 10 else { return false }
 
         state.feedTimestamps.append(.now)
-        state.hunger = min(100, state.hunger + 20)
-        state.happiness = min(100, state.happiness + 5)
-        state.energy = min(100, state.energy + 5)
+        state.hunger = min(100, state.hunger + 12)
+        state.happiness = min(100, state.happiness + 3)
+        state.energy = min(100, state.energy + 2)
+        state.addExperience(8)
         save()
         return true
     }
 
     func pet() {
+        guard state.happiness < 100 else {
+            // 하트 꽉 차면 쓰다듬기 효과 없음
+            state.happiness = 100
+            save()
+            return
+        }
         state.happiness = min(100, state.happiness + 10)
+        state.addExperience(1)
+        save()
+    }
+
+    /// 놀람 (탭) - 페널티
+    func surprise() {
+        state.happiness = max(0, state.happiness - 5)
+        state.energy = max(0, state.energy - 2)
         save()
     }
 
@@ -51,6 +66,7 @@ final class HamsterService {
         let energyCost = 20 * intensity
         state.happiness = min(100, state.happiness + happinessGain)
         state.energy = max(0, state.energy - energyCost)
+        state.addExperience(3 * intensity)
         save()
     }
 

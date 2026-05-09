@@ -31,7 +31,7 @@ private struct StatIndicator<Icon: View>: View {
             }
 
             Text("\(Int(value))")
-                .font(.custom("DOSGothic", size: 12))
+                .font(.custom("DOSSaemmul", size: 12))
                 .foregroundStyle(.white)
                 .frame(width: 24, alignment: .trailing)
         }

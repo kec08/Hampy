@@ -54,11 +54,13 @@ struct HampyActivityWidget: Widget {
                             HStack(spacing: 6) {
                                 Image("PixelHeart")
                                     .resizable()
+                                    .renderingMode(.original)
+                                    .aspectRatio(contentMode: .fit)
                                     .frame(width: 16, height: 16)
                                 Text("쓰다듬기")
                                     .font(.system(size: 12, weight: .medium, design: .monospaced))
+                                    .foregroundStyle(.white)
                             }
-                            .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 10)
                             .background(Color.white.opacity(0.12))

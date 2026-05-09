@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HampyView: View {
     let emotion: HamsterEmotion
+    var size: CGFloat = 1.0
     var onPet: () -> Void = {}
     var onTap: () -> Void = {}
 
@@ -39,13 +40,14 @@ struct HampyView: View {
             Image(displayImageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 144, height: 144)
+                .frame(width: 144 * size, height: 144 * size)
                 .offset(y: frameToggle ? -3 : 0)
                 .rotationEffect(.degrees(wiggleAngle))
                 .gesture(petGesture)
                 .onTapGesture { triggerSurprise() }
+                .animation(.easeInOut(duration: 0.5), value: size)
         }
-        .frame(width: 160, height: 220)
+        .frame(width: 160 * size, height: 220 * size)
         .onAppear { startIdleAnimation() }
     }
 
@@ -76,6 +78,7 @@ struct HampyView: View {
 
     private func triggerPetReaction() {
         onPet()
+        HampySound.pet.playWithHaptic()
         reactionState = .petted
         withAnimation(.easeInOut(duration: 0.2)) { wiggleAngle = 0 }
 
@@ -99,6 +102,7 @@ struct HampyView: View {
 
     private func triggerSurprise() {
         onTap()
+        HampySound.surprise.playWithHaptic()
         reactionState = .surprised
 
         // !? 떠오르기

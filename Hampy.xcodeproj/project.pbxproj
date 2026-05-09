@@ -67,11 +67,21 @@
 			);
 			target = BCFDE9B82FA8843100E06AE6 /* HampyActivityExtensionExtension */;
 		};
+		BCFDE9CF2FA8843300E06AE7 /* Exceptions for "Hampy" folder in "Hampy" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BCFDE91A2FA86D8000E06AE6 /* Hampy */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BCFDE91D2FA86D8000E06AE6 /* Hampy */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BCFDE9CF2FA8843300E06AE7 /* Exceptions for "Hampy" folder in "Hampy" target */,
+			);
 			path = Hampy;
 			sourceTree = "<group>";
 		};
@@ -516,18 +526,13 @@
 				DEVELOPMENT_TEAM = QLF22M2925;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Hampy/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				INFOPLIST_KEY_UIAppFonts = (
-					"DOSGothic.ttf",
-					"DOSIyagiBoldface.ttf",
-					"DOSMyungjo.ttf",
-					"DOSPilgi.ttf",
-					"DOSSaemmul.ttf",
-					"MiraeroNormal.ttf",
-					"Sam3KRFont.ttf",
-				);
+				INFOPLIST_KEY_UIAppFonts = "DOSGothic.ttf DOSIyagiBoldface.ttf DOSMyungjo.ttf DOSPilgi.ttf DOSSaemmul.ttf MiraeroNormal.ttf Sam3KRFont.ttf";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIBackgroundModes = fetch;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -562,18 +567,13 @@
 				DEVELOPMENT_TEAM = QLF22M2925;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Hampy/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				INFOPLIST_KEY_UIAppFonts = (
-					"DOSGothic.ttf",
-					"DOSIyagiBoldface.ttf",
-					"DOSMyungjo.ttf",
-					"DOSPilgi.ttf",
-					"DOSSaemmul.ttf",
-					"MiraeroNormal.ttf",
-					"Sam3KRFont.ttf",
-				);
+				INFOPLIST_KEY_UIAppFonts = "DOSGothic.ttf DOSIyagiBoldface.ttf DOSMyungjo.ttf DOSPilgi.ttf DOSSaemmul.ttf MiraeroNormal.ttf Sam3KRFont.ttf";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIBackgroundModes = fetch;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

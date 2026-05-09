@@ -64,7 +64,7 @@ final class LiveActivityService {
             happiness: state.happiness,
             energy: state.energy,
             emotion: state.currentEmotion.rawValue,
-            remainingFeeds: max(0, 5 - recentCount)
+            remainingFeeds: max(0, 10 - recentCount)
         )
     }
 }
