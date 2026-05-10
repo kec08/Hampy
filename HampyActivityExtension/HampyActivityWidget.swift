@@ -52,11 +52,9 @@ struct HampyActivityWidget: Widget {
 
                         Button(intent: PetHampyIntent()) {
                             HStack(spacing: 6) {
-                                Image("PixelHeart")
-                                    .resizable()
-                                    .renderingMode(.original)
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 16, height: 16)
+                                Image(systemName: "heart.fill")
+                                    .font(.system(size: 14))
+                                    .foregroundStyle(.pink)
                                 Text("쓰다듬기")
                                     .font(.system(size: 12, weight: .medium, design: .monospaced))
                                     .foregroundStyle(.white)

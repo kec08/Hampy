@@ -10,12 +10,10 @@ struct FeedHampyIntent: LiveActivityIntent {
     @MainActor
     func perform() async throws -> some IntentResult {
         var state = SharedStorage.load()
+        state.refillFeedStock()
+        guard state.feedStock > 0 else { return .result() }
 
-        let oneHourAgo = Date.now.addingTimeInterval(-3600)
-        state.feedTimestamps = state.feedTimestamps.filter { $0 > oneHourAgo }
-        guard state.feedTimestamps.count < 10 else { return .result() }
-
-        state.feedTimestamps.append(.now)
+        state.feedStock -= 1
         state.hunger = min(100, state.hunger + 12)
         state.happiness = min(100, state.happiness + 3)
         state.energy = min(100, state.energy + 2)
@@ -71,14 +69,12 @@ struct PetHampyIntent: LiveActivityIntent {
 
 @MainActor
 private func updateLiveActivity(state: HamsterState, emotion: String) {
-    let oneHourAgo = Date.now.addingTimeInterval(-3600)
-    let remaining = max(0, 10 - state.feedTimestamps.filter { $0 > oneHourAgo }.count)
     let contentState = HampyActivityAttributes.ContentState(
         hunger: state.hunger,
         happiness: state.happiness,
         energy: state.energy,
         emotion: emotion,
-        remainingFeeds: remaining
+        remainingFeeds: state.feedStock
     )
     let content = ActivityContent(state: contentState, staleDate: nil)
 
@@ -91,14 +87,12 @@ private func updateLiveActivity(state: HamsterState, emotion: String) {
 
 @MainActor
 private func updateLiveActivityAsync(state: HamsterState, emotion: String) async {
-    let oneHourAgo = Date.now.addingTimeInterval(-3600)
-    let remaining = max(0, 10 - state.feedTimestamps.filter { $0 > oneHourAgo }.count)
     let contentState = HampyActivityAttributes.ContentState(
         hunger: state.hunger,
         happiness: state.happiness,
         energy: state.energy,
         emotion: emotion,
-        remainingFeeds: remaining
+        remainingFeeds: state.feedStock
     )
     let content = ActivityContent(state: contentState, staleDate: nil)
 

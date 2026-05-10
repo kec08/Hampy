@@ -5,7 +5,10 @@ struct HamsterState: Codable {
     var happiness: Double
     var energy: Double
     var lastUpdated: Date
-    var feedTimestamps: [Date] // 먹이 시간 기록 (1시간 10개 제한)
+
+    // 먹이 시스템 (1시간마다 5개 지급, 최대 20개)
+    var feedStock: Int
+    var lastRefillDate: Date
 
     // 레벨 시스템
     var level: Int
@@ -16,10 +19,20 @@ struct HamsterState: Codable {
         happiness: 80,
         energy: 80,
         lastUpdated: .now,
-        feedTimestamps: [],
+        feedStock: 10,
+        lastRefillDate: .now,
         level: 1,
         experience: 0
     )
+
+    /// 경과 시간에 따라 먹이 보충 (1시간당 5개, 최대 20개)
+    mutating func refillFeedStock() {
+        let hoursPassed = Int(Date.now.timeIntervalSince(lastRefillDate) / 3600)
+        guard hoursPassed > 0 else { return }
+        let added = hoursPassed * 5
+        feedStock = min(20, feedStock + added)
+        lastRefillDate = lastRefillDate.addingTimeInterval(Double(hoursPassed) * 3600)
+    }
 
     /// 현재 레벨의 필요 경험치 (50, 100, 150, 200, 250, ...)
     var experienceToNext: Double {

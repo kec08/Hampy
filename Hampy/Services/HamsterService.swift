@@ -13,27 +13,23 @@ final class HamsterService {
 
     init() {
         self.state = SharedStorage.load()
+        state.refillFeedStock()
         applyTimeDecay()
         liveActivity.start(state: state)
     }
 
     // MARK: - Actions
 
-    /// 남은 먹이 개수 (1시간 10개 제한)
+    /// 남은 먹이 개수
     var remainingFeeds: Int {
-        let oneHourAgo = Date.now.addingTimeInterval(-3600)
-        let recentCount = state.feedTimestamps.filter { $0 > oneHourAgo }.count
-        return max(0, 10 - recentCount)
+        state.feedStock
     }
 
     func feed() -> Bool {
-        // 1시간 내 10개 제한
-        let oneHourAgo = Date.now.addingTimeInterval(-3600)
-        state.feedTimestamps = state.feedTimestamps.filter { $0 > oneHourAgo }
+        state.refillFeedStock()
+        guard state.feedStock > 0 else { return false }
 
-        guard state.feedTimestamps.count < 10 else { return false }
-
-        state.feedTimestamps.append(.now)
+        state.feedStock -= 1
         state.hunger = min(100, state.hunger + 12)
         state.happiness = min(100, state.happiness + 3)
         state.energy = min(100, state.energy + 2)
@@ -96,6 +92,7 @@ final class HamsterService {
     /// 앱 포그라운드 복귀 시 공유 저장소에서 동기화
     func syncFromShared() {
         state = SharedStorage.load()
+        state.refillFeedStock()
         applyTimeDecay()
     }
 }
