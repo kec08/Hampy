@@ -1,7 +1,7 @@
 # 🐹 햄피 (Hampy) - 다이나믹 아일랜드 가상 펫 햄스터
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/placeholder" alt="햄피" width="878"/>
+  <img src="https://github.com/user-attachments/assets/4aa96d7f-ce5f-4fa6-8f19-49c695ffadd1" alt="햄피" width="300"/>
 </p>
 
 <p align="center">
