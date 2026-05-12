@@ -71,20 +71,6 @@
 | 😤 삐짐 | 행복 < 20 |
 | 🐹 먹는 중 | 먹이주기 직후 |
 
-## 기술 스택
-
-| 분류 | 기술 |
-|------|------|
-| **UI** | SwiftUI |
-| **아키텍처** | MVVM + Service Layer |
-| **상태관리** | @Observable, Combine |
-| **Live Activity** | ActivityKit + WidgetKit |
-| **백그라운드** | BGAppRefreshTask |
-| **알림** | UserNotifications |
-| **데이터 저장** | UserDefaults (App Group) |
-| **스프라이트** | 8비트 픽셀아트 |
-| **최소 지원** | iOS 17.0+ |
-
 ## 프로젝트 구조
 
 ```
