@@ -46,11 +46,29 @@ struct HamsterState: Codable {
 
     /// 현재 감정 상태 계산
     var currentEmotion: HamsterEmotion {
+        // 극단적 상태 (우선순위 높음)
+        if happiness < 10 { return .angry }
+        if hunger < 15 && happiness < 30 { return .angry }
+
+        // 기본 부정 상태
         if hunger < 30 { return .hungry }
-        if energy < 30 { return .tired }
+        if energy < 20 { return .tired }
         if happiness < 20 { return .upset }
+
+        // 중간 상태
+        if happiness < 35 { return .annoyed }
+        if happiness < 50 && energy > 30 { return .bored }
+
+        // 무표정 (모든 스탯 중간)
+        if hunger > 40 && hunger < 65 && happiness > 40 && happiness < 65 { return .blank }
+
+        // 호기심 (에너지 높고 행복 적당)
+        if energy > 70 && happiness > 50 && happiness < 75 { return .curious }
+
+        // 행복
         if hunger > 60 && happiness > 60 { return .happy }
-        return .happy
+
+        return .blank
     }
 
     /// 레벨에 따른 햄스터 크기 배율 (0.7 ~ 1.65)

@@ -5,5 +5,6 @@ import WidgetKit
 struct HampyActivityBundle: WidgetBundle {
     var body: some Widget {
         HampyActivityWidget()
+        HampyCalendarWidget()
     }
 }

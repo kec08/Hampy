@@ -6,6 +6,11 @@ enum HamsterEmotion: String, Codable, CaseIterable {
     case tired
     case upset
     case eating
+    case angry
+    case annoyed
+    case blank
+    case bored
+    case curious
 
     var displayName: String {
         switch self {
@@ -14,6 +19,11 @@ enum HamsterEmotion: String, Codable, CaseIterable {
         case .tired: "피곤함"
         case .upset: "삐짐"
         case .eating: "먹는 중"
+        case .angry: "화남"
+        case .annoyed: "짜증"
+        case .blank: "멍"
+        case .bored: "심심"
+        case .curious: "호기심"
         }
     }
 
@@ -24,6 +34,11 @@ enum HamsterEmotion: String, Codable, CaseIterable {
         case .tired: "😴"
         case .upset: "😤"
         case .eating: "🐹"
+        case .angry: "😡"
+        case .annoyed: "😒"
+        case .blank: "😶"
+        case .bored: "😑"
+        case .curious: "🤔"
         }
     }
 }

@@ -102,6 +102,11 @@ private struct IslandPixelHamster: View {
         case "yummy": "hampy_yummy"
         case "love": "hampy_love"
         case "surprised": "hampy_surprised"
+        case "angry": "hampy_angry"
+        case "annoyed": "hampy_annoyed"
+        case "blank": "hampy_blank"
+        case "bored": "hampy_bored"
+        case "curious": "hampy_curious"
         default: "hampy_happy"
         }
     }

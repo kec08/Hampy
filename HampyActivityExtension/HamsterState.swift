@@ -41,11 +41,17 @@ struct HamsterState: Codable {
 
     /// 현재 감정 상태 계산
     var currentEmotion: HamsterEmotion {
+        if happiness < 10 { return .angry }
+        if hunger < 15 && happiness < 30 { return .angry }
         if hunger < 30 { return .hungry }
-        if energy < 30 { return .tired }
+        if energy < 20 { return .tired }
         if happiness < 20 { return .upset }
+        if happiness < 35 { return .annoyed }
+        if happiness < 50 && energy > 30 { return .bored }
+        if hunger > 40 && hunger < 65 && happiness > 40 && happiness < 65 { return .blank }
+        if energy > 70 && happiness > 50 && happiness < 75 { return .curious }
         if hunger > 60 && happiness > 60 { return .happy }
-        return .happy
+        return .blank
     }
 
     /// 경험치 추가 + 레벨업 처리

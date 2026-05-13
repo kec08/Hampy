@@ -17,6 +17,11 @@ struct PixelHamsterView: View {
         case .tired: "hampy_tired"
         case .upset: "hampy_upset"
         case .eating: "hampy_eating"
+        case .angry: "hampy_angry"
+        case .annoyed: "hampy_annoyed"
+        case .blank: "hampy_blank"
+        case .bored: "hampy_bored"
+        case .curious: "hampy_curious"
         }
     }
 

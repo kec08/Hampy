@@ -1,4 +1,5 @@
 import Foundation
+import WidgetKit
 
 @Observable
 final class HamsterService {
@@ -87,6 +88,7 @@ final class HamsterService {
         state.lastUpdated = .now
         SharedStorage.save(state)
         liveActivity.update(state: state)
+        WidgetCenter.shared.reloadTimelines(ofKind: "HampyCalendarWidget")
     }
 
     /// 앱 포그라운드 복귀 시 공유 저장소에서 동기화

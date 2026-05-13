@@ -62,6 +62,11 @@ struct HampyView: View {
             case .tired: return "hampy_tired"
             case .upset: return "hampy_upset"
             case .eating: return "hampy_eating"
+            case .angry: return "hampy_angry"
+            case .annoyed: return "hampy_annoyed"
+            case .blank: return "hampy_blank"
+            case .bored: return "hampy_bored"
+            case .curious: return "hampy_curious"
             }
         }
     }
