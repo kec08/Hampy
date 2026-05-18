@@ -2,13 +2,11 @@ import AppIntents
 import ActivityKit
 import WidgetKit
 
-// MARK: - 먹이주기 Intent
+// MARK: - 위젯 전용 먹이주기
 
-struct FeedHampyIntent: LiveActivityIntent {
-    static var title: LocalizedStringResource = "먹이주기"
-    static var description: IntentDescription = "햄피에게 먹이를 줍니다"
+struct WidgetFeedIntent: AppIntent {
+    static var title: LocalizedStringResource = "위젯 먹이주기"
 
-    @MainActor
     func perform() async throws -> some IntentResult {
         var state = SharedStorage.load()
         state.refillFeedStock()
@@ -22,30 +20,35 @@ struct FeedHampyIntent: LiveActivityIntent {
         state.lastUpdated = .now
         SharedStorage.save(state)
 
-        updateLA(state: state, emotion: "eating")
-        reloadWidgets()
+        // eating 표정으로 즉시 갱신
+        setReaction("eating")
+        reloadAll()
+        updateActivity(state: state, emotion: "eating")
 
-        Task { @MainActor in
+        // 시간차 표정 복원
+        Task {
             try? await Task.sleep(for: .seconds(1.0))
+            setReaction("yummy")
+            reloadAll()
             let current = SharedStorage.load()
-            updateLA(state: current, emotion: "yummy")
+            updateActivity(state: current, emotion: "yummy")
 
             try? await Task.sleep(for: .seconds(1.5))
+            clearReaction()
+            reloadAll()
             let latest = SharedStorage.load()
-            await updateLAAsync(state: latest, emotion: latest.currentEmotion.rawValue)
+            updateActivity(state: latest, emotion: latest.currentEmotion.rawValue)
         }
 
         return .result()
     }
 }
 
-// MARK: - 쓰다듬기 Intent
+// MARK: - 위젯 전용 쓰다듬기
 
-struct PetHampyIntent: LiveActivityIntent {
-    static var title: LocalizedStringResource = "쓰다듬기"
-    static var description: IntentDescription = "햄피를 쓰다듬습니다"
+struct WidgetPetIntent: AppIntent {
+    static var title: LocalizedStringResource = "위젯 쓰다듬기"
 
-    @MainActor
     func perform() async throws -> some IntentResult {
         var state = SharedStorage.load()
         if state.happiness < 100 {
@@ -55,26 +58,28 @@ struct PetHampyIntent: LiveActivityIntent {
         state.lastUpdated = .now
         SharedStorage.save(state)
 
-        updateLA(state: state, emotion: "love")
-        reloadWidgets()
+        // love 표정으로 즉시 갱신
+        setReaction("love")
+        reloadAll()
+        updateActivity(state: state, emotion: "love")
 
-        Task { @MainActor in
+        Task {
             try? await Task.sleep(for: .seconds(2.0))
+            clearReaction()
+            reloadAll()
             let latest = SharedStorage.load()
-            await updateLAAsync(state: latest, emotion: latest.currentEmotion.rawValue)
+            updateActivity(state: latest, emotion: latest.currentEmotion.rawValue)
         }
 
         return .result()
     }
 }
 
-// MARK: - 운동 Intent
+// MARK: - 위젯 전용 운동
 
-struct ExerciseHampyIntent: LiveActivityIntent {
-    static var title: LocalizedStringResource = "운동하기"
-    static var description: IntentDescription = "햄피가 쳇바퀴를 돕니다"
+struct WidgetExerciseIntent: AppIntent {
+    static var title: LocalizedStringResource = "위젯 운동하기"
 
-    @MainActor
     func perform() async throws -> some IntentResult {
         var state = SharedStorage.load()
         guard state.energy > 5 else { return .result() }
@@ -85,8 +90,16 @@ struct ExerciseHampyIntent: LiveActivityIntent {
         state.lastUpdated = .now
         SharedStorage.save(state)
 
-        updateLA(state: state, emotion: state.currentEmotion.rawValue)
-        reloadWidgets()
+        // 달리기 표정으로 즉시 갱신
+        setReaction("running")
+        reloadAll()
+        updateActivity(state: state, emotion: state.currentEmotion.rawValue)
+
+        Task {
+            try? await Task.sleep(for: .seconds(2.0))
+            clearReaction()
+            reloadAll()
+        }
 
         return .result()
     }
@@ -94,14 +107,20 @@ struct ExerciseHampyIntent: LiveActivityIntent {
 
 // MARK: - 헬퍼
 
-@MainActor
-private func reloadWidgets() {
+private func setReaction(_ emotion: String) {
+    SharedStorage.shared.set(emotion, forKey: "widget_reaction")
+}
+
+private func clearReaction() {
+    SharedStorage.shared.removeObject(forKey: "widget_reaction")
+}
+
+private func reloadAll() {
     WidgetCenter.shared.reloadTimelines(ofKind: "HampyGameWidget")
     WidgetCenter.shared.reloadTimelines(ofKind: "HampyCalendarWidget")
 }
 
-@MainActor
-private func updateLA(state: HamsterState, emotion: String) {
+private func updateActivity(state: HamsterState, emotion: String) {
     let contentState = HampyActivityAttributes.ContentState(
         hunger: state.hunger,
         happiness: state.happiness,
@@ -110,24 +129,10 @@ private func updateLA(state: HamsterState, emotion: String) {
         remainingFeeds: state.feedStock
     )
     let content = ActivityContent(state: contentState, staleDate: nil)
+
     Task {
         for activity in Activity<HampyActivityAttributes>.activities {
             await activity.update(content)
         }
-    }
-}
-
-@MainActor
-private func updateLAAsync(state: HamsterState, emotion: String) async {
-    let contentState = HampyActivityAttributes.ContentState(
-        hunger: state.hunger,
-        happiness: state.happiness,
-        energy: state.energy,
-        emotion: emotion,
-        remainingFeeds: state.feedStock
-    )
-    let content = ActivityContent(state: contentState, staleDate: nil)
-    for activity in Activity<HampyActivityAttributes>.activities {
-        await activity.update(content)
     }
 }

@@ -89,6 +89,7 @@ final class HamsterService {
         SharedStorage.save(state)
         liveActivity.update(state: state)
         WidgetCenter.shared.reloadTimelines(ofKind: "HampyCalendarWidget")
+        WidgetCenter.shared.reloadTimelines(ofKind: "HampyGameWidget")
     }
 
     /// 앱 포그라운드 복귀 시 공유 저장소에서 동기화
@@ -96,5 +97,10 @@ final class HamsterService {
         state = SharedStorage.load()
         state.refillFeedStock()
         applyTimeDecay()
+        // 위젯에서 변경된 데이터도 반영
+        SharedStorage.save(state)
+        liveActivity.update(state: state)
+        WidgetCenter.shared.reloadTimelines(ofKind: "HampyCalendarWidget")
+        WidgetCenter.shared.reloadTimelines(ofKind: "HampyGameWidget")
     }
 }

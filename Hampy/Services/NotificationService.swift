@@ -6,21 +6,33 @@ enum NotificationService {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
     }
 
-    /// 1시간마다 먹이 지급 알림
-    static func scheduleFeedRefillNotification() {
+    /// 아침 8시, 점심 12:30, 저녁 7시 먹이 지급 알림
+    static func scheduleFeedNotifications() {
         let center = UNUserNotificationCenter.current()
 
-        center.getPendingNotificationRequests { requests in
-            let exists = requests.contains { $0.identifier == "feed_refill" }
-            guard !exists else { return }
+        // 기존 알림 모두 제거 후 재등록
+        center.removePendingNotificationRequests(withIdentifiers: [
+            "feed_breakfast", "feed_lunch", "feed_dinner"
+        ])
 
+        let meals: [(id: String, hour: Int, minute: Int, title: String)] = [
+            ("feed_breakfast", 8,  0,  "🐹 아침밥이 도착했어요!"),
+            ("feed_lunch",     12, 30, "🐹 점심밥이 도착했어요!"),
+            ("feed_dinner",    19, 0,  "🐹 저녁밥이 도착했어요!"),
+        ]
+
+        for meal in meals {
             let content = UNMutableNotificationContent()
-            content.title = "🐹 간식이 지급되었습니다!"
+            content.title = meal.title
             content.body = "햄피와 놀아볼까요?"
             content.sound = .default
 
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3600, repeats: true)
-            let request = UNNotificationRequest(identifier: "feed_refill", content: content, trigger: trigger)
+            var dateComp = DateComponents()
+            dateComp.hour = meal.hour
+            dateComp.minute = meal.minute
+
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: true)
+            let request = UNNotificationRequest(identifier: meal.id, content: content, trigger: trigger)
 
             center.add(request)
         }

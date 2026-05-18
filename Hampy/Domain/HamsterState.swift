@@ -6,7 +6,7 @@ struct HamsterState: Codable {
     var energy: Double
     var lastUpdated: Date
 
-    // 먹이 시스템 (1시간마다 5개 지급, 최대 20개)
+    // 먹이 시스템 (아침 8시, 점심 12:30, 저녁 19시 각 10개 지급, 최대 30개)
     var feedStock: Int
     var lastRefillDate: Date
 
@@ -25,13 +25,33 @@ struct HamsterState: Codable {
         experience: 0
     )
 
-    /// 경과 시간에 따라 먹이 보충 (1시간당 5개, 최대 20개)
+    /// 식사 시간 기반 먹이 보충 (8:00, 12:30, 19:00 각 10개, 최대 30개)
     mutating func refillFeedStock() {
-        let hoursPassed = Int(Date.now.timeIntervalSince(lastRefillDate) / 3600)
-        guard hoursPassed > 0 else { return }
-        let added = hoursPassed * 5
-        feedStock = min(20, feedStock + added)
-        lastRefillDate = lastRefillDate.addingTimeInterval(Double(hoursPassed) * 3600)
+        let cal = Calendar.current
+        let now = Date.now
+
+        // 식사 시간 (시, 분)
+        let mealTimes: [(Int, Int)] = [(8, 0), (12, 30), (19, 0)]
+
+        // 오늘 + 어제 식사 시간 중 lastRefillDate 이후 ~ 현재 사이에 해당하는 것 카운트
+        var mealsToAdd = 0
+        for dayOffset in -1...0 {
+            guard let baseDay = cal.date(byAdding: .day, value: dayOffset, to: now) else { continue }
+            for (hour, minute) in mealTimes {
+                var comp = cal.dateComponents([.year, .month, .day], from: baseDay)
+                comp.hour = hour
+                comp.minute = minute
+                comp.second = 0
+                guard let mealDate = cal.date(from: comp) else { continue }
+                if mealDate > lastRefillDate && mealDate <= now {
+                    mealsToAdd += 1
+                }
+            }
+        }
+
+        guard mealsToAdd > 0 else { return }
+        feedStock = min(30, feedStock + mealsToAdd * 10)
+        lastRefillDate = now
     }
 
     /// 현재 레벨의 필요 경험치 (50, 100, 150, 200, 250, ...)

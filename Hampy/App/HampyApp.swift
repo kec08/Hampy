@@ -8,7 +8,7 @@ struct HampyApp: App {
     init() {
         BackgroundService.register(hamsterService: hamsterService)
         NotificationService.requestPermission()
-        NotificationService.scheduleFeedRefillNotification()
+        NotificationService.scheduleFeedNotifications()
     }
 
     var body: some Scene {
